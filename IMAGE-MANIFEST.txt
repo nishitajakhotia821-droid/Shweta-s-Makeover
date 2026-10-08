@@ -1,0 +1,63 @@
+SHWETA'S MAKEOVER — IMAGE MANIFEST
+
+Create/download the following images in THIS SAME FOLDER.
+Recommended: JPG, landscape or portrait according to the creative.
+
+CORE:
+hero-banner.jpg
+beauty-makeover-services.jpg
+service-menu.jpg
+why-choose-us.jpg
+clean-comfortable-salon.jpg
+salon-interior.jpg
+professional-beauty-team.jpg
+happy-client.jpg
+testimonial.jpg
+instagram-social-media.jpg
+appointment-booking.jpg
+contact-visit.jpg
+
+HAIR:
+hair-styling-hair-care.jpg
+haircut.jpg
+advanced-haircut.jpg
+split-ends.jpg
+bangs.jpg
+hair-wash.jpg
+deep-conditioning.jpg
+blow-dry.jpg
+hair-treatment.jpg
+hair-colour.jpg
+hair-transformation-showcase.jpg
+
+BEAUTY:
+skin-care-facial.jpg
+threading.jpg
+waxing.jpg
+facial.jpg
+before-after-transformation.jpg
+
+NAILS & BODY:
+nail-art.jpg
+manicure.jpg
+pedicure.jpg
+massage.jpg
+nail-art-showcase.jpg
+
+MAKEUP & BRIDAL:
+makeup-services.jpg
+bridal-makeup.jpg
+makeup-transformation-showcase.jpg
+festive-makeup-campaign.jpg
+bridal-season-campaign.jpg
+
+ACADEMY:
+beauty-academy.jpg
+professional-makeup-training.jpg
+hair-beauty-courses.jpg
+academy-student-transformation.jpg
+
+CAMPAIGNS:
+special-offers.jpg
+membership-loyalty.jpg
+seasonal-beauty-campaign.jpg
