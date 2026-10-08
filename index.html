@@ -27,6 +27,231 @@
 <div class="mini-card"><span>04</span><h3>Personal</h3><p class="muted">A friendly studio experience where your look starts with listening.</p></div>
 </div></section>
 <section class="cta"><div><p class="eyebrow">YOUR NEXT LOOK</p><h2>Let's create your<br><em>best version.</em></h2></div><a class="btn" href="contact.html">Book Now</a></section>
-</main><footer><div><a class="footer-logo" href="index.html">SHWETA'S MAKEOVER</a></div><p>Arvind Society, near Sujata Mastani, Sadashiv Peth, Pune 411030<br>Open • Closes 9 PM</p><p>© 2026 Shweta's Makeover</p></footer><script>
-document.addEventListener('DOMContentLoaded',()=>{const m=document.querySelector('.menu'),n=document.querySelector('.nav');if(m&&n)m.onclick=()=>n.classList.toggle('open');const f=document.querySelector('#bookingForm'),note=document.querySelector('#formNote');if(f&&note)f.addEventListener('submit',e=>{e.preventDefault();note.textContent='Thank you — your appointment enquiry has been captured. Connect this form to WhatsApp, email or a booking system before launch.';f.reset()});});
-</script></body></html>
+<footer><div><a class="footer-logo" href="index.html">SHWETA'S MAKEOVER</a></div><p>Arvind Society, near Sujata Mastani, Sadashiv Peth, Pune 411030<br>Open • Closes 9 PM</p><p>© 2026 Shweta's Makeover</p></footer><script>
+document.addEventListener('DOMContentLoaded',()=>{
+  const nav=document.querySelector('.nav');
+  const toggle=document.querySelector('.menu');
+  if(toggle&&nav){
+    toggle.setAttribute('aria-expanded','false');
+    toggle.addEventListener('click',()=>{
+      const open=nav.classList.toggle('open');
+      toggle.setAttribute('aria-expanded',String(open));
+      document.body.classList.toggle('menu-open',open);
+    });
+    nav.querySelectorAll('a').forEach((link)=>link.addEventListener('click',()=>{
+      nav.classList.remove('open');
+      toggle.setAttribute('aria-expanded','false');
+      document.body.classList.remove('menu-open');
+    }));
+    document.addEventListener('keydown',(event)=>{if(event.key==='Escape'){nav.classList.remove('open');toggle.setAttribute('aria-expanded','false');document.body.classList.remove('menu-open')}});
+  }
+
+  const modal = document.getElementById('bookingModal');
+  if (!modal) {
+    const modalMarkup = `
+      <div class="booking-modal" id="bookingModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="bookingTitle">
+        <div class="booking-modal__panel">
+          <button class="booking-modal__close" type="button" aria-label="Close booking form">×</button>
+          <div class="booking-form__wrap">
+            <div class="booking-form__intro">
+              <p class="eyebrow">BOOK APPOINTMENT</p>
+              <h3 id="bookingTitle">Request your salon appointment</h3>
+            </div>
+            <form id="enhancedBookingForm" novalidate>
+              <div class="booking-grid">
+                <label><span>Full Name</span><input name="fullName" type="text" required placeholder="Your full name"></label>
+                <label><span>Phone Number</span><input name="phone" type="tel" required placeholder="+91 00000 00000"></label>
+                <label><span>Email</span><input name="email" type="email" required placeholder="you@example.com"></label>
+                <label><span>Service</span><select name="service" required><option value="">Select a service</option><option>Hair</option><option>Hair Color</option><option>Hair Treatment</option><option>Makeup</option><option>Bridal Makeup</option><option>Nails</option><option>Skin/Beauty</option><option>Other</option></select></label>
+                <label><span>Preferred Date</span><input name="date" type="date" required></label>
+                <label><span>Preferred Time</span><input name="time" type="time" required></label>
+                <label class="full-span"><span>Additional Message</span><textarea name="message" rows="4" placeholder="Tell us what you would like"></textarea></label>
+              </div>
+              <div class="booking-form__actions">
+                <button class="btn dark" type="submit">Confirm Request</button>
+                <button class="btn btn-light btn-inline" type="button" data-close-modal>Cancel</button>
+              </div>
+              <p class="booking-form__error" aria-live="polite"></p>
+            </form>
+            <div class="booking-success" hidden>
+              <p class="eyebrow success-eyebrow">Appointment received</p>
+              <h4>Your appointment request has been received.</h4>
+              <ul class="confirmation-list"></ul>
+              <div class="booking-actions-row">
+                <a class="btn dark" href="https://wa.me/919156479928" target="_blank" rel="noreferrer">WhatsApp</a>
+                <a class="btn btn-light" href="tel:+919156479928">Call Salon</a>
+                <a class="btn btn-light" href="index.html">Back to Home</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+    document.body.insertAdjacentHTML('beforeend', modalMarkup);
+    document.head.insertAdjacentHTML('beforeend', `<style>
+      body.menu-open{overflow:hidden}.booking-modal{position:fixed;inset:0;display:grid;place-items:center;background:rgba(17,13,10,.68);padding:24px;opacity:0;pointer-events:none;transition:.25s ease;z-index:200}.booking-modal.is-open{opacity:1;pointer-events:auto}.booking-modal__panel{position:relative;width:min(760px,100%);max-height:90vh;overflow:auto;background:#f8f1e8;border:1px solid rgba(33,27,23,.14);box-shadow:0 30px 80px rgba(17,13,10,.28);padding:28px 28px 22px;border-radius:18px}.booking-modal__close{position:absolute;top:20px;right:20px;border:0;background:#fff;border-radius:50%;width:36px;height:36px;font-size:24px;cursor:pointer}.booking-form__wrap{display:grid;gap:20px}.booking-form__intro h3{font-family:'Cormorant Garamond',serif;font-size:clamp(34px,4vw,52px);line-height:1;margin:8px 0 0}.booking-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.booking-grid label{display:flex;flex-direction:column;gap:8px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#3a312c;font-weight:600}.booking-grid input,.booking-grid select,.booking-grid textarea{padding:12px 14px;border:1px solid rgba(33,27,23,.17);background:#fffdfb;font:inherit;color:#211b17}.booking-grid textarea{resize:vertical;min-height:110px}.booking-grid .full-span{grid-column:1/-1}.booking-form__actions,.booking-actions-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}.btn{display:inline-flex;align-items:center;justify-content:center;padding:14px 22px;border:1px solid transparent;font-size:10px;letter-spacing:.15em;text-transform:uppercase;text-decoration:none;cursor:pointer;transition:transform .25s ease, background .25s ease, border-color .25s ease}.btn:hover{transform:translateY(-2px)}.btn.dark{background:#211b17;color:#fff}.btn-light{background:transparent;border-color:rgba(33,27,23,.2);color:#211b17}.btn-inline{padding-inline:18px}.booking-form__error{min-height:20px;margin:0;color:#9e2b20;font-size:12px;font-weight:600}.confirmation-list{padding-left:18px;display:grid;gap:8px;color:#4b3e36;margin:16px 0 22px}.booking-success h4{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,3vw,42px);line-height:1;margin:10px 0 0}.success-eyebrow{margin:0}.@media (max-width:640px){.booking-grid{grid-template-columns:1fr}.booking-modal__panel{padding:18px 16px 20px}.booking-form__actions,.booking-actions-row{flex-direction:column;align-items:stretch}.booking-form__actions .btn,.booking-actions-row .btn{width:100%}} </style>`);
+  }
+
+  const modalEl = document.getElementById('bookingModal');
+  const modalForm = document.getElementById('enhancedBookingForm');
+  const successState = modalEl?.querySelector('.booking-success');
+  const errorBox = modalEl?.querySelector('.booking-form__error');
+  const confirmationList = modalEl?.querySelector('.confirmation-list');
+
+  const openBookingModal = (service = '') => {
+    if (!modalEl) return;
+    const serviceField = modalEl.querySelector('select[name="service"]');
+    if (serviceField && service) serviceField.value = service;
+    modalEl.classList.add('is-open');
+    modalEl.setAttribute('aria-hidden','false');
+    document.body.classList.add('menu-open');
+    const firstInput = modalEl.querySelector('input[name="fullName"]');
+    setTimeout(() => firstInput && firstInput.focus(), 60);
+  };
+
+  const closeBookingModal = () => {
+    if (!modalEl) return;
+    modalEl.classList.remove('is-open');
+    modalEl.setAttribute('aria-hidden','true');
+    document.body.classList.remove('menu-open');
+    if (modalForm) modalForm.reset();
+    if (successState) successState.hidden = true;
+    if (errorBox) errorBox.textContent = '';
+    if (modalForm) modalForm.hidden = false;
+    const serviceField = modalEl.querySelector('select[name="service"]');
+    if (serviceField) serviceField.value = '';
+  };
+
+  modalEl?.addEventListener('click', (event) => {
+    if (event.target === modalEl) closeBookingModal();
+  });
+  modalEl?.querySelector('.booking-modal__close')?.addEventListener('click', closeBookingModal);
+  modalEl?.querySelector('[data-close-modal]')?.addEventListener('click', closeBookingModal);
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && modalEl && modalEl.classList.contains('is-open')) closeBookingModal();
+  });
+
+  document.querySelectorAll('[data-book-service]').forEach((button) => {
+    button.addEventListener('click', (event) => {
+      event.preventDefault();
+      const service = button.dataset.bookService || '';
+      openBookingModal(service);
+    });
+  });
+
+  const bookingButtons = document.querySelectorAll('.btn, .link, a[href="contact.html"], a[href="mailto:"]');
+  bookingButtons.forEach((button) => {
+    const text = (button.textContent || '').toLowerCase();
+    if (text.includes('book') || text.includes('appointment') || text.includes('consultation')) {
+      button.setAttribute('data-book-service', button.dataset.bookService || 'Hair');
+      button.addEventListener('click', (event) => {
+        if (button.tagName === 'A' && !button.hasAttribute('data-book-service')) return;
+        event.preventDefault();
+        openBookingModal(button.dataset.bookService || 'Hair');
+      }, { passive: false });
+    }
+  });
+
+  if (modalForm) {
+    modalForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const formData = new FormData(modalForm);
+      const name = (formData.get('fullName') || '').toString().trim();
+      const phone = (formData.get('phone') || '').toString().trim();
+      const email = (formData.get('email') || '').toString().trim();
+      const service = (formData.get('service') || '').toString().trim();
+      const date = (formData.get('date') || '').toString();
+      const time = (formData.get('time') || '').toString();
+      if (!name || !phone || !email || !service || !date || !time) {
+        errorBox.textContent = 'Please complete all required fields before submitting.';
+        return;
+      }
+      if (!/^\+?[0-9\s()-]{8,20}$/.test(phone)) {
+        errorBox.textContent = 'Please enter a valid phone number.';
+        return;
+      }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        errorBox.textContent = 'Please enter a valid email address.';
+        return;
+      }
+      if (!date || new Date(date) < new Date(new Date().toDateString())) {
+        errorBox.textContent = 'Please choose a valid future date.';
+        return;
+      }
+      const bookingRef = `SM-${Math.floor(1000 + Math.random() * 9000)}`;
+      const items = [
+        `Service: ${service}`,
+        `Date: ${new Date(date + 'T00:00:00').toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}`,
+        `Time: ${time}`,
+        `Customer: ${name}`,
+        `Reference: ${bookingRef}`
+      ];
+      confirmationList.innerHTML = items.map((line) => `<li>${line}</li>`).join('');
+      modalForm.hidden = true;
+      successState.hidden = false;
+      errorBox.textContent = '';
+    });
+  }
+
+  const galleryCards = document.querySelectorAll('.gallery-card img');
+  if (galleryCards.length) {
+    let currentIndex = 0;
+    const images = [...galleryCards].map((img) => img.src);
+    const lightbox = document.createElement('div');
+    lightbox.className = 'gallery-lightbox';
+    lightbox.innerHTML = '<div class="gallery-lightbox__panel"><button class="gallery-lightbox__close" type="button" aria-label="Close gallery">×</button><button class="gallery-lightbox__nav prev" type="button" aria-label="Previous image">←</button><img alt="Salon gallery preview"><button class="gallery-lightbox__nav next" type="button" aria-label="Next image">→</button></div>';
+    document.body.appendChild(lightbox);
+    const imgEl = lightbox.querySelector('img');
+    const showImage = (index) => {
+      currentIndex = (index + images.length) % images.length;
+      imgEl.src = images[currentIndex];
+      imgEl.alt = 'Salon gallery preview';
+    };
+    galleryCards.forEach((img, index) => {
+      img.addEventListener('click', () => {
+        currentIndex = index;
+        showImage(index);
+        lightbox.classList.add('open');
+        document.body.classList.add('menu-open');
+      });
+    });
+    lightbox.querySelector('.gallery-lightbox__close').addEventListener('click', () => {
+      lightbox.classList.remove('open');
+      document.body.classList.remove('menu-open');
+    });
+    lightbox.querySelector('.prev').addEventListener('click', () => showImage(currentIndex - 1));
+    lightbox.querySelector('.next').addEventListener('click', () => showImage(currentIndex + 1));
+    document.addEventListener('keydown', (event) => {
+      if (!lightbox.classList.contains('open')) return;
+      if (event.key === 'Escape') {
+        lightbox.classList.remove('open');
+        document.body.classList.remove('menu-open');
+      }
+      if (event.key === 'ArrowLeft') showImage(currentIndex - 1);
+      if (event.key === 'ArrowRight') showImage(currentIndex + 1);
+    });
+    lightbox.addEventListener('click', (event) => {
+      if (event.target === lightbox) {
+        lightbox.classList.remove('open');
+        document.body.classList.remove('menu-open');
+      }
+    });
+    document.head.insertAdjacentHTML('beforeend', `<style>
+      .gallery-lightbox{position:fixed;inset:0;display:grid;place-items:center;background:rgba(17,13,10,.72);padding:24px;opacity:0;pointer-events:none;transition:.2s ease;z-index:210}.gallery-lightbox.open{opacity:1;pointer-events:auto}.gallery-lightbox__panel{position:relative;max-width:min(980px,92vw);width:100%;background:#fff;padding:18px;border:1px solid rgba(33,27,23,.15);box-shadow:0 30px 70px rgba(17,13,10,.2)}.gallery-lightbox__panel img{width:100%;max-height:78vh;object-fit:cover}.gallery-lightbox__close,.gallery-lightbox__nav{position:absolute;top:16px;background:#fff;border:1px solid rgba(33,27,23,.15);border-radius:50%;width:38px;height:38px;cursor:pointer;font-size:22px}.gallery-lightbox__close{right:16px}.gallery-lightbox__nav.prev{left:16px;top:50%;transform:translateY(-50%)}.gallery-lightbox__nav.next{right:16px;top:50%;transform:translateY(-50%)} @media (max-width:640px){.gallery-lightbox__panel{padding:10px}.gallery-lightbox__close,.gallery-lightbox__nav{width:34px;height:34px}} </style>`);
+  }
+
+  document.querySelectorAll('.catalog-item, .price-row, .service-card, .mini-card, .feature, .gallery-card, .academy-card, .campaign-card').forEach((el)=>el.classList.add('reveal-item'));
+  const revealObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal-item').forEach((el) => revealObserver.observe(el));
+  document.head.insertAdjacentHTML('beforeend', `<style>
+    .reveal-item{opacity:0;transform:translateY(18px);transition:opacity .5s ease, transform .5s ease}.reveal-item.is-visible{opacity:1;transform:none}
+  </style>`);
+});
+</script>
